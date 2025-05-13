@@ -1,0 +1,234 @@
+<sdf version="1.6">
+  <world name="default">
+    <!-- Thêm mặt đất -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Thêm ánh sáng -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Cấu hình vật lý -->
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <gravity>0 0 -9.81</gravity>
+    </physics>
+
+    <!-- Giữ nguyên các mô hình bàn, ghế, quạt -->
+    <!-- Model: Table -->
+    <model name="table">
+      <link name="link">
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 0 0</pose>
+        </inertial>
+        <pose>1.60204 -1.38684 0.5 0 0 0</pose> <!-- Tăng z để tránh lún -->
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <uri>/home/ad/baocao_ws/src/baocao/meshes/bàn.stl</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <uri>/home/ad/baocao_ws/src/baocao/meshes/bàn.stl</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.2</mu>
+                <mu2>0.2</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <min_depth>0.01</min_depth>
+                <max_vel>0</max_vel>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+    </model>
+
+    <!-- Model: Chair -->
+    <model name="chair">
+      <link name="link">
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 0 0</pose>
+        </inertial>
+        <pose>-1.34721 1.64792 0.5 0 0 0</pose> <!-- Tăng z để tránh lún -->
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <uri>/home/ad/baocao_ws/src/baocao/meshes/ghế.stl</uri>
+              <scale>0.02 0.02 0.02</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <uri>/home/ad/baocao_ws/src/baocao/meshes/ghế.stl</uri>
+              <scale>0.02 0.02 0.02</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.2</mu>
+                <mu2>0.2</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <min_depth>0.01</min_depth>
+                <max_vel>0</max_vel>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+    </model>
+
+    <!-- Model: Fan -->
+    <model name="fan">
+      <link name="link">
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 0 0</pose>
+        </inertial>
+        <pose>-0.254831 -0.261083 0.5 0 0 0</pose> <!-- Tăng z để tránh lún -->
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <uri>/home/ad/Downloads/quạt.stl</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <uri>/home/ad/Downloads/quạt.stl</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.2</mu>
+                <mu2>0.2</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <min_depth>0.01</min_depth>
+                <max_vel>0</max_vel>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+    </model>
+  </world>
+</sdf>

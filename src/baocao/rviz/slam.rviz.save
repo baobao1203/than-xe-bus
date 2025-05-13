@@ -1,0 +1,30 @@
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz/RobotModel
+      Description: ""
+      Enabled: true
+      Name: RobotModel
+      Value: true
+    - Class: rviz/Map
+      Enabled: true
+      Name: Map
+      Topic: /map
+      Value: true
+    - Class: rviz/LaserScan
+      Enabled: true
+      Name: LaserScan
+      Topic: /scan
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Name: TF
+      Value: true
+  Enabled: true
+  Global Options:
+    Fixed Frame: map
+  Tools:
+    - Class: rviz/Interact
+  Value: true
+
+
