@@ -1,0 +1,23 @@
+<!--<launch>
+  <param name="robot_description" command="$(find xacro)/xacro '$(find baocao)/ile_robot_ur5.xacro'" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+   RViz with MoveIt 
+  <include file="$(find ur5_moveit_config)/launch/moveit_rviz.launch" />
+</launch>-->
+<launch>
+    <!-- Khởi động Gazebo với một world rỗng -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+    </include>
+
+    <!-- Load mô hình URDF vào Gazebo -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find baocao)/ile_robot_ur5.xacro'" />
+
+    <!-- Spawn robot vào Gazebo -->
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen" args="-param robot_description -urdf -model mobile_robot" />
+
+
+</launch>

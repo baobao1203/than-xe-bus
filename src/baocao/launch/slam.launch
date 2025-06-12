@@ -8,7 +8,9 @@
   </include>
 
   <!-- Đẩy URDF lên parameter server -->
-  <param name="robot_description" command="$(find xacro)/xacro $(find baocao)/baocao.urdf"/>
+  <!-- <param name="robot_description" command="$(find xacro)/xacro $(find baocao)/baocao.urdf"/>-->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find baocao)/ile_robot_ur5.xacro'" />
+
   <node name="lidar_tf" pkg="tf" type="static_transform_publisher"  args="0 0 0.15 0 0 0 base_link lidar_link 100" />
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" 
         args="-urdf -model robot -param robot_description" output="screen"/>
@@ -52,6 +54,6 @@
   <!-- Khởi động RViz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find baocao)/rviz/slam.rviz" output="screen"/>
 
-  <!-- Điều khiển robot bằng teleop_twist_keyboard -->
-  <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"/>
+  <!-- Điều khiển robot bằng teleop_twist_keyboard-->
+  <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"/> 
 </launch>

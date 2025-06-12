@@ -1,0 +1,24 @@
+<launch>
+  <!-- Load robot model -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find baocao)/ile_robot_ur5.xacro'" />
+
+  <!-- Gazebo world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+
+  <!-- Spawn robot in Gazebo -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-param robot_description -urdf -model my_robot" />
+
+  <!-- Start controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner"
+        args="joint_state_controller ur5_arm_controller" />
+
+  <!-- MoveIt planning backend -->
+  <include file="$(find ur5_moveit_config)/launch/move_group.launch" />
+yo
+  <!-- RViz with MoveIt -->
+  <include file="$(find ur5_moveit_config)/launch/moveit_rviz.launch" />
+  
+  <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"/>
+
+</launch>
